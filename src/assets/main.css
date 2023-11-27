@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'NotoSerifSC-Light';
+    src: url('./fonts/NotoSerifSC-Light.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NotoSerifSC-Regular';
+    src: url('./fonts/NotoSerifSC-Regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}

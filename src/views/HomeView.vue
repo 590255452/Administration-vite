@@ -4,19 +4,28 @@ import Menu from "@/components/Menu.vue";
 import Header from "@/components/Header.vue";</script>
 
 <template>
-    <div class="common-layout">
+    <el-container>
+        <el-aside width="auto">
+            <Menu />
+        </el-aside>
         <el-container>
-            <el-aside width="200px">
-                <Menu />
-            </el-aside>
-            <el-container>
-                <el-header>
-                    <Header />
-                </el-header>
-                <el-main>
-                    <RouterView />
-                </el-main>
-            </el-container>
+            <el-header>
+                <Header />
+            </el-header>
+            <el-main>
+                <RouterView />
+            </el-main>
         </el-container>
-    </div>
+    </el-container>
 </template>
+
+<style scoped lang="less">
+.el-container {
+    height: 100vh;
+}
+
+.el-header {
+    padding: 0;
+    margin: 0;
+}
+</style>

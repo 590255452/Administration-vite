@@ -1,0 +1,27 @@
+[
+    {
+        "title": "首页",
+        "id": "1",
+        "path": "/",
+        "icon": "home"
+    },
+    {
+        "title": "系统管理",
+        "id": "2",
+        "icon": "setting",
+        "children": [
+            {
+                "title": "用户列表",
+                "id": "21",
+                "path": "/userList",
+                "icon": "user"
+            },
+            {
+                "title": "角色列表",
+                "id": "22",
+                "path": "/roleList",
+                "icon": "role"
+            }
+        ]
+    }
+]
