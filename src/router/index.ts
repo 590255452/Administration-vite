@@ -19,13 +19,17 @@ const router = createRouter({
                     path: "roleList",
                     name: "roleList",
                     component: () => import("@/views/RoleView.vue")
-                },
+                }
             ]
         },
         {
             path: "/login",
             name: "login",
             component: LoginView
+        },
+        {
+            path: "/test",
+            component: () => import("/test/test.vue")
         }
     ]
 });
