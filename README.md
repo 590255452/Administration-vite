@@ -7,9 +7,9 @@
 
 # 二、步骤
 1. 在HomeView中配置布局容器
-2. Header.vue导入SVG图片
-3. 设置Menu.vue：使用JSON数据动态导入、设置menu高度、通过store绑定isCollapse数据
-4. 创建LoginView：
+2. Header.vue：导入SVG图片；编写页面
+3. Menu.vue：引入ElementPlus的menu菜单，设置menu高度；使用JSON数据动态导入；通过store绑定isCollapse数据
+4. 创建LoginView：编写页面；引入Element的form表单，设置规则；配置mockjs；写登录和验证码函数
 
 
 

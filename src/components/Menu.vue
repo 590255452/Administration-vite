@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import menuList from "@/plugin/menuList.json";
 import SvgIcon from "@/plugin/SvgIcon.vue";
-import { useMenuStore } from "@/stores/menu.ts";
+import { useMenuStore } from "@/stores/menuStore.ts";
 
 const menuStore = useMenuStore();
 
