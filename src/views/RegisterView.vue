@@ -54,8 +54,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     if (!formEl) return;
     await formEl.validate((valid, fields) => {
         if (valid) {
-            let data = registerStore.Register(ruleForm);
-            console.log(data);
+            registerStore.Register(ruleForm);
         } else {
             console.log("error submit!", fields);
         }

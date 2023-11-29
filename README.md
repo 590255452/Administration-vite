@@ -17,3 +17,9 @@
 - 系统管理
   - 用户管理
   - 角色管理
+
+
+
+# 四、其他
+- 安装插件yarn global test-node，可是搭配nodemon实时运行ts文件
+- FormData对象

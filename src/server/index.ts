@@ -42,6 +42,7 @@ serviceAxios.interceptors.response.use(
         // 响应数据经过此处做中间操作(如数据过滤)
         res = res.data;
         if (res.code === 200) {
+            ElMessage.success(res.code + "：" + res.msg);
             return res.data;
         } else {
             ElMessage.error(res.code + "：" + res.msg);
