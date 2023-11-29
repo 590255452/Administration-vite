@@ -7,13 +7,16 @@ const menuStore = useMenuStore();
 
 const handleOpen = (key: string, keyPath: string[]) => {
     console.log(key, keyPath);
-    console.log("aaa");
 };
 const handleClose = (key: string, keyPath: string[]) => {
     console.log(key, keyPath);
 };
 
-const defaultActive = ref(localStorage.getItem("menu").menuPath || "/");
+const defaultActive = ref(JSON.parse(localStorage.getItem("menu"))?.menuPath || "/");    // localStorage｜sessionStorage存储的是json数据
+
+const test = () => {
+    console.log(JSON.parse(localStorage.getItem("menu")).menuPath);
+}
 </script>
 
 <template>
@@ -25,6 +28,7 @@ const defaultActive = ref(localStorage.getItem("menu").menuPath || "/");
         style="height: 100%"
         :collapse="menuStore.isCollapse"
         router>
+        <button @click="test">测试</button>
         <template
             v-for="item in menuList"
             :key="item.id">

@@ -10,6 +10,11 @@ const isShow = ref(false);
 const divBlur = () => {
     isShow.value = false;
 };
+
+const logOut = () => {
+    localStorage.clear();
+    window.location.reload();
+};
 </script>
 
 <template>
@@ -34,6 +39,22 @@ const divBlur = () => {
                     @click="isShow = !isShow"
                     class="border rounded-full border-gray-200 select-none cursor-pointer"
                     src="/images/Fenke.jpg" />
+                
+                <transition name="run">
+                <span
+                    class="fixed w-[200px] p-2 shadow-lg border border-gray-200 z-50 rounded-lg top-[65px] right-8 bg-white select-none"
+                    v-show="isShow">
+                    <ul class="font-normal text-[14px] text-gray-600">
+                        <li class="px-3 py-2.5 rounded-lg hover:bg-[#F2F3F6] flex items-center cursor-pointer">
+                            <button>个人中心</button>
+                        </li>
+                        <div class="border-[1px] border-gray-100 my-2"></div>
+                        <li class="px-3 py-2.5 rounded-lg hover:bg-[#F2F3F6] flex items-center cursor-pointer">
+                            <button @click="logOut">退出</button>
+                        </li>
+                    </ul>
+                </span>
+                </transition>
             </div>
             <div
                 class="p-3 rounded-full cursor-pointer hover:bg-[#EAF2FF]"
@@ -54,21 +75,7 @@ const divBlur = () => {
                     iconStyle="height: 20px;width: 20px" />
             </div>
 
-            <transition name="run">
-                <span
-                    class="fixed w-[200px] p-2 shadow-lg border border-gray-200 z-50 rounded-lg top-[65px] right-8 bg-white select-none"
-                    v-show="isShow">
-                    <ul class="font-normal text-[14px] text-gray-600">
-                        <li class="px-3 py-2.5 rounded-lg hover:bg-[#F2F3F6] flex items-center cursor-pointer">
-                            <button>个人中心</button>
-                        </li>
-                        <div class="border-[1px] border-gray-100 my-2"></div>
-                        <li class="px-3 py-2.5 rounded-lg hover:bg-[#F2F3F6] flex items-center cursor-pointer">
-                            <button>退出</button>
-                        </li>
-                    </ul>
-                </span>
-            </transition>
+           
         </div>
     </div>
 </template>

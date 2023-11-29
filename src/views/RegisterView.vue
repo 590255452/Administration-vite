@@ -2,13 +2,14 @@
 import { onMounted, reactive, ref } from "vue";
 import axios from "axios";
 import type { FormInstance, FormRules } from "element-plus";
-import { useLoginStore } from "@/stores/loginStore";
+import { useRegisterStore } from "@/stores/registerStore";
 
-const loginStore = useLoginStore();
+const registerStore = useRegisterStore();
 
 interface RuleForm {
     username: string;
     password: string;
+    password_confirmation: string;
     verify: string;
 }
 
@@ -16,8 +17,17 @@ const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive<RuleForm>({
     username: "wangluqi",
     password: "1q2q3q4q",
+    password_confirmation: "1q2q3q4q",
     verify: ""
 });
+
+const confirmation = (rule: any, value: any, callback: any) => {
+    if (value !== ruleForm.password) {
+        callback(new Error("两次密码输入不匹配"));
+    } else {
+        callback();
+    }
+};
 
 const rules = reactive<FormRules<RuleForm>>({
     username: [
@@ -27,6 +37,11 @@ const rules = reactive<FormRules<RuleForm>>({
     password: [
         { required: true, message: "请输入密码", trigger: "blur" },
         { min: 8, max: 16, message: "长度8-16位", trigger: "blur" }
+    ],
+    password_confirmation: [
+        { required: true, message: "请输入密码", trigger: "blur" },
+        { min: 8, max: 16, message: "长度8-16位", trigger: "blur" },
+        { validator: confirmation, trigger: "blur" }
     ],
     verify: [
         { required: true, message: "请输入验证码", trigger: "blur" },
@@ -39,7 +54,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     if (!formEl) return;
     await formEl.validate((valid, fields) => {
         if (valid) {
-            let data = loginStore.Login(ruleForm);
+            let data = registerStore.Register(ruleForm);
             console.log(data);
         } else {
             console.log("error submit!", fields);
@@ -95,6 +110,15 @@ onMounted(getCapImage);
                     style="height: 50px" />
             </el-form-item>
             <el-form-item
+                label="再次输入密码"
+                prop="password_confirmation"
+                style="margin: 18px 0">
+                <el-input
+                    type="password"
+                    v-model="ruleForm.password_confirmation"
+                    style="height: 50px" />
+            </el-form-item>
+            <el-form-item
                 label="验证码"
                 prop="verify"
                 style="margin: 18px 0">
@@ -111,16 +135,7 @@ onMounted(getCapImage);
                     type="primary"
                     class="w-[100px]"
                     @click="submitForm(ruleFormRef)">
-                    登录
-                </el-button>
-                <el-button
-                    type="success"
-                    class="w-[100px]">
-                    <router-link
-                        to="/register"
-                        class="w-[100px]"
-                        >注册
-                    </router-link>
+                    注册
                 </el-button>
             </el-form-item>
         </el-form>
