@@ -32,7 +32,7 @@ const confirmation = (rule: any, value: any, callback: any) => {
 const rules = reactive<FormRules<RuleForm>>({
     username: [
         { required: true, message: "请输入用户名", trigger: "blur" },
-        { min: 6, max: 10, message: "长度6-10位", trigger: "blur" }
+        { min: 6, max: 16, message: "长度6-16位", trigger: "blur" }
     ],
     password: [
         { required: true, message: "请输入密码", trigger: "blur" },

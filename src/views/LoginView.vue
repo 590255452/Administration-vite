@@ -22,7 +22,7 @@ const ruleForm = reactive<RuleForm>({
 const rules = reactive<FormRules<RuleForm>>({
     username: [
         { required: true, message: "请输入用户名", trigger: "blur" },
-        { min: 6, max: 10, message: "长度6-10位", trigger: "blur" }
+        { min: 6, max: 16, message: "长度6-16位", trigger: "blur" }
     ],
     password: [
         { required: true, message: "请输入密码", trigger: "blur" },
@@ -37,10 +37,9 @@ const rules = reactive<FormRules<RuleForm>>({
 //登录
 const submitForm = async (formEl: FormInstance | undefined) => {
     if (!formEl) return;
-    await formEl.validate((valid, fields) => {
+    await formEl.validate(async (valid, fields) => {
         if (valid) {
-            let data = loginStore.Login(ruleForm);
-            console.log(data);
+            await loginStore.Login(ruleForm);
         } else {
             console.log("error submit!", fields);
         }
@@ -51,7 +50,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 const capImage = ref("");
 
 async function getCapImage() {
-    axios.get("/capImage").then(res => {
+    axios.get("http://localhost:3000/capImage").then(res => {
         capImage.value = res.data.data.capImage;
     });
 }

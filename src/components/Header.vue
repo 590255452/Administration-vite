@@ -2,9 +2,11 @@
 import { ref } from "vue";
 import SvgIcon from "@/plugin/SvgIcon.vue";
 import { useMenuStore } from "@/stores/menuStore.ts";
+import { useUserStore } from "@/stores/userStore.ts";
 
 const menuStore = useMenuStore();
-
+const userStore = useUserStore();
+console.log(userStore?.user.color);
 const isHover = ref(false);
 const isShow = ref(false);
 const divBlur = () => {
@@ -13,7 +15,7 @@ const divBlur = () => {
 
 const logOut = () => {
     localStorage.clear();
-    window.location.reload();
+    location.reload();
 };
 </script>
 
@@ -38,22 +40,28 @@ const logOut = () => {
                 <el-avatar
                     @click="isShow = !isShow"
                     class="border rounded-full border-gray-200 select-none cursor-pointer"
-                    src="/images/Fenke.jpg" />
-                
+                    :style="`background-color: ${userStore?.user.color}`">
+                    <span>{{ userStore?.user.username.charAt(0).toUpperCase() || "ME" }}</span>
+                </el-avatar>
+<!--                <el-avatar-->
+<!--                    @click="isShow = !isShow"-->
+<!--                    class="border rounded-full border-gray-200 select-none cursor-pointer"-->
+<!--                    src="/images/Fenke.jpg" />-->
+
                 <transition name="run">
-                <span
-                    class="fixed w-[200px] p-2 shadow-lg border border-gray-200 z-50 rounded-lg top-[65px] right-8 bg-white select-none"
-                    v-show="isShow">
-                    <ul class="font-normal text-[14px] text-gray-600">
-                        <li class="px-3 py-2.5 rounded-lg hover:bg-[#F2F3F6] flex items-center cursor-pointer">
-                            <button>个人中心</button>
-                        </li>
-                        <div class="border-[1px] border-gray-100 my-2"></div>
-                        <li class="px-3 py-2.5 rounded-lg hover:bg-[#F2F3F6] flex items-center cursor-pointer">
-                            <button @click="logOut">退出</button>
-                        </li>
-                    </ul>
-                </span>
+                    <span
+                        class="fixed w-[200px] p-2 shadow-lg border border-gray-200 z-50 rounded-lg top-[65px] right-8 bg-white select-none"
+                        v-show="isShow">
+                        <ul class="font-normal text-[14px] text-gray-600">
+                            <li class="px-3 py-2.5 rounded-lg hover:bg-[#F2F3F6] flex items-center cursor-pointer">
+                                <button>个人中心</button>
+                            </li>
+                            <div class="border-[1px] border-gray-100 my-2"></div>
+                            <li class="px-3 py-2.5 rounded-lg hover:bg-[#F2F3F6] flex items-center cursor-pointer">
+                                <button @click="logOut">退出</button>
+                            </li>
+                        </ul>
+                    </span>
                 </transition>
             </div>
             <div
@@ -74,8 +82,6 @@ const logOut = () => {
                     :color="isHover ? '#377DFF' : '#7F8C9B'"
                     iconStyle="height: 20px;width: 20px" />
             </div>
-
-           
         </div>
     </div>
 </template>

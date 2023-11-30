@@ -15,7 +15,8 @@ const Result: ContainerProps = <ContainerProps>{
     msg: "操作成功",
     data: {
         token: "",
-        capImage: ""
+        capImage: "",
+        color: "#000000"
     }
 };
 let verification: string = "";
@@ -69,6 +70,8 @@ Mock.mock("/login", "post", (data: any) => {
         Result.code = 403;
         Result.data.token = "";
     } else {
+        Result.data.username = obj.username;
+        Result.data.password = obj.password;
         Result.msg = "登录成功";
         Result.code = 200;
         Result.data.token = Random.string(32);
@@ -76,7 +79,7 @@ Mock.mock("/login", "post", (data: any) => {
     return Result;
 });
 
-//请求注册数据
+//请求注册
 Mock.mock("/register", "post", (data: any) => {
     const obj = qs.parse(data.body);
     if (obj.verify !== verification.toLowerCase()) {
@@ -90,6 +93,7 @@ Mock.mock("/register", "post", (data: any) => {
     } else {
         user.append("username", obj.username);
         user.append("password", obj.password);
+        Result.data.color = Random.color();
         Result.msg = "注册成功";
         Result.code = 200;
         Result.data.token = "";

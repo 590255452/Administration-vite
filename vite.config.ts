@@ -33,5 +33,15 @@ export default defineConfig({
         alias: {
             "@": fileURLToPath(new URL("./src", import.meta.url))
         }
+    },
+    server: {
+        proxy: {                                            // 设置跨域｜反向代理
+            "/api": {
+                target: "http://localhost:3000",
+                changeOrigin: true,
+                ws: true,
+                rewrite: (path) => path.replace(/^\/api/, ""),
+            },
+        },
     }
 });

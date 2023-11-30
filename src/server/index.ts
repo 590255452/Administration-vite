@@ -16,6 +16,7 @@ const serviceAxios = axios.create(serverConfig);
 //请求拦截
 serviceAxios.interceptors.request.use(
     config => {
+        console.warn(import.meta.env.BASE_URL);
         // 如果开启token认证
         if (localStorage.getItem("token") !== null) {
             config.headers.Authorization = JSON.parse(localStorage.getItem("token")).token; // 请求头携带token
@@ -41,6 +42,7 @@ serviceAxios.interceptors.response.use(
     res => {
         // 响应数据经过此处做中间操作(如数据过滤)
         res = res.data;
+        console.log(`%c${JSON.stringify(res.data, null, 2)}`, "font-size: 16px;color: pink");
         if (res.code === 200) {
             ElMessage.success(res.code + "：" + res.msg);
             return res.data;
